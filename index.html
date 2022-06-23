@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -14,8 +15,8 @@
     </header>
     <div class="calculator">
         <div class="screen">
-            <div id="result-screen"></div>
-            <div id="input-screen"></div>
+            <div id="result-screen">100 + </div>
+            <div id="input-screen">200</div>
         </div>
         <div class="keypad">
             <button class="buttons" id="all-clear">AC</button>
@@ -39,10 +40,10 @@
 
             <button class="buttons numbers" >.</button>
             <button class="buttons numbers">0</button>
-            <button class="buttons" id="equals" >=</button>
+            <button class="buttons" id="equals" onclick="dummy()" >=</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
