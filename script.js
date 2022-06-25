@@ -13,26 +13,24 @@ const numbers = document.querySelectorAll(".numbers");
 const operators = document.querySelectorAll(".operator");
 const pointbutton = document.getElementById("point");
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   clear();
 });
 
-
-
+window.addEventListener("keydown", keyboardinput);
 delbutton.addEventListener("click", deletenumber);
 allclear.addEventListener("click", clear);
 pointbutton.addEventListener("click", appendpoint);
-equals.addEventListener("click", () => {
+
+equals.addEventListener("click", result);
+
+function result(){
   if (currentdisplayvalue.innerHTML != "" && lastdiplayvalue.innerHTML != "") {
     previousvalue = parseFloat(lastdiplayvalue.innerHTML);
     currentvalue = parseFloat(currentdisplayvalue.innerHTML);
     operate(operation, previousvalue, currentvalue);
   }
-});
-
+}
 
 numbers.forEach((btn) => {
   btn.addEventListener("click", function () {
@@ -47,9 +45,8 @@ operators.forEach((operator) => {
   });
 });
 
-
 // *******
-function deletenumber(){
+function deletenumber() {
   currentdisplayvalue.innerHTML = currentdisplayvalue.innerHTML.slice(0, -1);
 }
 
@@ -58,8 +55,6 @@ function clear() {
   lastdiplayvalue.innerHTML = "";
   operation = "";
 }
-
-
 
 // ****
 function add(x, y) {
@@ -75,30 +70,27 @@ function divide(x, y) {
   return x / y;
 }
 
-
-
-
 function operate(op, x, y) {
   if (op === "+") {
     currentdisplayvalue.innerHTML = add(x, y);
-    lastdiplayvalue.innerHTML ="";
+    lastdiplayvalue.innerHTML = "";
   }
   if (op === "-") {
     currentdisplayvalue.innerHTML = subtract(x, y);
-    lastdiplayvalue.innerHTML ="";
+    lastdiplayvalue.innerHTML = "";
   }
   if (op === "x") {
     currentdisplayvalue.innerHTML = multiply(x, y);
-    lastdiplayvalue.innerHTML ="";
+    lastdiplayvalue.innerHTML = "";
   }
   if (op === "÷") {
     if (currentdisplayvalue.innerText == 0) {
       alert("error");
       currentdisplayvalue.innerHTML = "Error";
-      astdiplayvalue.innerHTML ="";
+      astdiplayvalue.innerHTML = "";
     }
     currentdisplayvalue.innerHTML = divide(x, y);
-    lastdiplayvalue.innerHTML ="";
+    lastdiplayvalue.innerHTML = "";
   } else {
     console.log("invalid operator");
     console.log(op, x, y);
@@ -159,3 +151,32 @@ function setoperation(operator) {
   }
 }
 
+function keyboardinput(e) {
+  if (e.key >= 0 && e.key <= 9) {
+    inputNumber(e.key);
+  }
+  if (e.key === ".") {
+    appendpoint();
+  }
+  if (e.key === "Backspace") {
+    deletenumber();
+  }
+  if (e.key === "Escape") {
+    clear();
+  }
+  if (e.key === "=" || e.key === "Enter") {
+    result();
+  }
+  if (e.key === "+") {
+    setoperation("+");
+  }
+  if (e.key === "-") {
+    setoperation("-");
+  }
+  if (e.key === "*") {
+    setoperation("x");
+  }
+  if (e.key === "/") {
+    setoperation("÷");
+  }
+}
